@@ -29,12 +29,9 @@ define(function(require) {
 		for (var i=0,tail; i<this.tailCount;i+=1){
 			tail = this.addChild(new PIXI.Graphics());
 			this.tails.push(tail);
-// 			tail.beginFill(0xFFFFFF).drawCircle(100-this.direction.x*i*this.speed,100-this.direction.y*i*this.speed,i);
 			tail.beginFill(0xFFFFFF).drawCircle(0,0,i);
-// 			tail.visible = false;
 		}
 		this.main = this.tails.pop();
-		this.main.visible = true;
 	};
 
 	Ball.prototype.move = function(){
