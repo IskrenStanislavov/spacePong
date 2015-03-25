@@ -2,19 +2,17 @@ define(function(require) {
 	var config		= require('config'),
 		ndgmr 		= require('libs/ndgmr.Collision'),
 		Signal 		= require('libs/signals.min');
+		PIXI 		= require("libs/pixi");
 		
-	var Ball = function(graphics){ //call extend the createjs.Bitmap
-		this.graphics = graphics;
-		this.ball = graphics.ball;
-		$.extend(this, config.ball);
-		this.addListeners();
-		this._pause = false;
-		this.events = {
-			'wallHit': new Signal(),
-			'playerHit': new Signal(),
-			'CPUHit': new Signal(),
-		};
-		return this;
+	var Ball = function(){ //call extend the createjs.Bitmap
+		PIXI.Graphics.apply(this);
+		this.init();
+	};
+
+	Ball.prototype = Object.create(PIXI.Graphics);
+
+	Ball.prototype.init = function(){
+		this.beginFill("white").drawCircle(0,0,10)
 	};
 
 	$.extend(Ball.prototype, {

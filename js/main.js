@@ -2,24 +2,19 @@ require.config({
     baseUrl: 'js',
 });
 
-String.prototype.capitalize = function() {
-    return this.charAt(0).toUpperCase() + this.slice(1);
-}
-
-$.extend(Array.prototype, {
-	// http://stackoverflow.com/a/10050831
-	range: function(n){
-		var v=[];
-		return Array.apply(null, Array(n)).map(function (_, i) {
-				return i;
-			});
-	}
-});
-
 define(function(require) {
-	var Viewport = require('viewport'),
-		manager = require('manager').getInstance(),
-		vp = new Viewport();
-	$("#game").verticalCenter();
-	manager.start();
+	var PIXI 		= require("libs/pixi");
+
+	var stage = new PIXI.Stage(0x000000);
+
+	function animate() {
+	    requestAnimFrame(animate);
+
+	    // just for fun, let's rotate mr rabbit a little
+	    bunny.rotation += 0.1;
+
+	    // render the stage
+	    renderer.render(stage);
+	}
+
 });
