@@ -5,14 +5,32 @@ define(function(require) {
 		PIXI 		= require("libs/pixi");
 		
 	var Ball = function(){ //call extend the createjs.Bitmap
-		PIXI.Graphics.apply(this);
+		PIXI.DisplayObjectContainer.apply(this);
+		this.x = 100;
+		this.y = 100;
+		this.speed = 6;
+		this.direction = new PIXI.Point(-1,1);
+		this.tailCount = 10;
 		this.init();
 	};
 
-	Ball.prototype = Object.create(PIXI.Graphics);
+	Ball.prototype = Object.create(PIXI.DisplayObjectContainer.prototype);
 
 	Ball.prototype.init = function(){
-		this.beginFill("white").drawCircle(0,0,10)
+		this.tails = [];
+		for (var i=0,tail; i<this.tailCount;i+=1){
+			tail = this.addChild(new PIXI.Graphics());
+			this.tails.push(tail);
+// 			tail.beginFill(0xFFFFFF).drawCircle(100-this.direction.x*i*this.speed,100-this.direction.y*i*this.speed,i);
+			tail.beginFill(0xFFFFFF).drawCircle(0,0,i);
+// 			tail.visible = false;
+		}
+		this.main = this.tails.pop();
+		this.main.visible = true;
+	};
+
+	Ball.prototype.move = function(){
+
 	};
 
 	$.extend(Ball.prototype, {

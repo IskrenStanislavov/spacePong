@@ -4,17 +4,16 @@ require.config({
 
 define(function(require) {
 	var PIXI 		= require("libs/pixi");
+	var Ball        = require("ball");
 
 	var stage = new PIXI.Stage(0x000000);
-
+	var ball = stage.addChild(new Ball());
+    var renderer = PIXI.autoDetectRenderer(400, 300);
+    document.body.appendChild(renderer.view);
+    requestAnimFrame(animate);
 	function animate() {
-	    requestAnimFrame(animate);
-
-	    // just for fun, let's rotate mr rabbit a little
-	    bunny.rotation += 0.1;
-
-	    // render the stage
 	    renderer.render(stage);
+	    requestAnimFrame(animate);
 	}
 
 });
