@@ -1,4 +1,15 @@
 define(function(){
+	return {
+		"canvas": {
+			"id": "a",
+			"width": 600,
+			"height": 400,
+		},
+		"ball": {
+			"radius": 10,
+			"tailCount":10,
+		},
+	}; 
 	var config = {
 		'DEBUG': 1,
 		'DEMO':true,
@@ -89,14 +100,4 @@ define(function(){
 			'speed':5
 		},
 	};
-	config.imagesManifest = [
-		// {src : "images/paddle.png", id : "paddle"},
-		// {src : "images/ball.png", id : "ball"},
-		// {src : "images/preview1.png", id : "menuBG"},
-	];
-	if (config.DEBUG){
-		config.imagesManifest.push({src : "error/on/purpose.png", id : "erroronpurpose"});
-	}
-
-	return config;
 })

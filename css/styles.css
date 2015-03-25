@@ -2,7 +2,7 @@ body,html {
 	margin: 0px;
 	padding: 0px;
  	user-select:none;
- 	background: black;
+ 	background: #dddddd;
 }
 canvas#game {
     position: absolute;
