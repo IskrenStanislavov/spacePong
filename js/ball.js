@@ -16,6 +16,14 @@ define(function(require) {
 
 	Ball.prototype = Object.create(PIXI.DisplayObjectContainer.prototype);
 
+	Ball.prototype.moveData = function(tailIndex){
+		return {
+			"x": 100 - this.direction.x * tailIndex * this.speed,
+			"y": 100 - this.direction.y * tailIndex * this.speed,
+			"radius":tailIndex
+		};
+	};
+
 	Ball.prototype.init = function(){
 		this.tails = [];
 		for (var i=0,tail; i<this.tailCount;i+=1){
