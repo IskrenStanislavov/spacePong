@@ -37,16 +37,16 @@ define(function(require) {
 		this.oldPositions = this.oldPositions.slice(-config.ball.tailCount+1);
 		this.x += this.direction.x * this.speed;
 		this.y += this.direction.y * this.speed;
-		if (this.x < 0 + config.ball.radius){
+		if (this.x < 0 + config.ball.radius + config.players.area){ //left
 			this.direction.x *= -1;
 		}
-		if (this.x >= config.canvas.width - config.ball.radius){
+		if (this.x >= config.canvas.width - config.ball.radius - config.players.area){ // right
 			this.direction.x *= -1;
 		}
-		if (this.y < 0 + config.ball.radius){
+		if (this.y < 0 + config.ball.radius){//up
 			this.direction.y *= -1;
 		}
-		if (this.y >= config.canvas.height - config.ball.radius){
+		if (this.y >= config.canvas.height - config.ball.radius){//down
 			this.direction.y *= -1;
 		}
 		this.oldPositions.forEach(function(pos, i) {

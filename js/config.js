@@ -9,6 +9,9 @@ define(function(){
 			"radius": 10,
 			"tailCount":10,
 		},
+		"players":{
+			"area":50,//width
+		},
 	}; 
 	var config = {
 		'DEBUG': 1,
