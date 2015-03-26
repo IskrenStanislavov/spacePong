@@ -8,7 +8,7 @@ define(function(require) {
 		PIXI.DisplayObjectContainer.apply(this);
 		this.x = config.canvas.width/2;
 		this.y = config.canvas.height/2;
-		this.speed = 1;
+		this.speed = 4;
 		this.direction = new PIXI.Point(-1,-1);
 		this.radius = config.ball.radius;
 		this.init();
@@ -16,43 +16,43 @@ define(function(require) {
 
 	Ball.prototype = Object.create(PIXI.DisplayObjectContainer.prototype);
 
-// 	Ball.prototype.moveData = function(tailIndex){
-// 		return {
-// 			"x": 100 - this.direction.x * tailIndex * this.speed,
-// 			"y": 100 - this.direction.y * tailIndex * this.speed,
-// 			"radius":tailIndex
-// 		};
-// 	};
-
 	Ball.prototype.init = function(){
 		this.tails = [];
+		this.oldPositions = [];
 		for (var i=config.ball.tailCount,tail; i>0;i-=1){
 			tail = this.addChild(new PIXI.Graphics());
 			this.tails.push(tail);
+			tail.alpha = 0.05*(config.ball.tailCount-i);
 			tail.beginFill(0xFFFFFF).drawCircle(0,0,this.radius-i);
 		}
 		this.main = this.tails.pop();
+		this.main.alpha=1;
 	};
 
 	Ball.prototype.move = function(){
-			if (this._pause){
-				return;
-			}
-			this.x += this.direction.x * this.speed;
-			this.y += this.direction.y * this.speed;
-			if (this.x < 0 + config.ball.radius){
-				this.direction.x *= -1;
-			}
-			if (this.x >= config.canvas.width - config.ball.radius){
-				this.direction.x *= -1;
-			}
-			if (this.y < 0 + config.ball.radius){
-				this.direction.y *= -1;
-			}
-			if (this.y >= config.canvas.height - config.ball.radius){
-				this.direction.y *= -1;
-			}
-
+		if (this._pause){
+			return;
+		}
+		this.oldPositions.push(new PIXI.Point(this.x, this.y));
+		this.oldPositions = this.oldPositions.slice(-config.ball.tailCount+1);
+		this.x += this.direction.x * this.speed;
+		this.y += this.direction.y * this.speed;
+		if (this.x < 0 + config.ball.radius){
+			this.direction.x *= -1;
+		}
+		if (this.x >= config.canvas.width - config.ball.radius){
+			this.direction.x *= -1;
+		}
+		if (this.y < 0 + config.ball.radius){
+			this.direction.y *= -1;
+		}
+		if (this.y >= config.canvas.height - config.ball.radius){
+			this.direction.y *= -1;
+		}
+		this.oldPositions.forEach(function(pos, i) {
+			this.tails[i].x = -(this.x - pos.x);
+			this.tails[i].y = -(this.y - pos.y);
+		}.bind(this));
 	};
 
 	$.extend(Ball.prototype, {
