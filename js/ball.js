@@ -6,10 +6,10 @@ define(function(require) {
 		
 	var Ball = function(){ //call extend the createjs.Bitmap
 		PIXI.DisplayObjectContainer.apply(this);
-		this.x = config.canvas.width/2;
-		this.y = config.canvas.height/2;
-		this.speed = 4;
-		this.direction = new PIXI.Point(-1,-1);
+		this.x = config.ball.x;
+		this.y = config.ball.y;
+		this.speed = config.ball.speed;
+		this.direction = config.ball.direction;
 		this.radius = config.ball.radius;
 		this.init();
 	};
@@ -24,6 +24,7 @@ define(function(require) {
 			this.tails.push(tail);
 			tail.alpha = 0.05*(config.ball.tailCount-i);
 			tail.beginFill(0xFFFFFF).drawCircle(0,0,this.radius-i);
+			tail.cacheAsBitmap = true;
 		}
 		this.main = this.tails.pop();
 		this.main.alpha=1;
@@ -39,6 +40,7 @@ define(function(require) {
 		this.y += this.direction.y * this.speed;
 		if (this.x < 0 + config.ball.radius + config.players.area){ //left
 			this.direction.x *= -1;
+			console.log("hit:(", this.x, this.y,")",config.canvas.width);
 		}
 		if (this.x >= config.canvas.width - config.ball.radius - config.players.area){ // right
 			this.direction.x *= -1;

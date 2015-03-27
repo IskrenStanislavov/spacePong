@@ -1,16 +1,22 @@
 define(function(){
+	var squareSize = Math.min(window.innerWidth, window.innerHeight) *0.9;
+	var PIXI 		= require("libs/pixi");
 	return {
 		"canvas": {
-			"id": "a",
-			"width": 600,
-			"height": 400,
+			"id": "game",
+			"width": squareSize,
+			"height": squareSize,
 		},
 		"ball": {
+			"speed":2,
 			"radius": 10,
-			"tailCount":10,
+			"tailCount": 10,
+			"direction": new PIXI.Point(-2,-1),
+			"x": squareSize/2,
+			"y": squareSize/2,
 		},
 		"players":{
-			"area":50,//width
+			"area":0,//width
 		},
 	}; 
 	var config = {
