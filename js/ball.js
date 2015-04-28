@@ -24,7 +24,7 @@ define(function(require) {
 			this.tails.push(tail);
 			tail.alpha = 0.05*(config.ball.tailCount-i);
 			tail.beginFill(0xFFFFFF).drawCircle(0,0,this.radius-i);
-			tail.cacheAsBitmap = true;
+			// tail.cacheAsBitmap = true;
 		}
 		this.main = this.tails.pop();
 		this.main.alpha=1;
@@ -40,7 +40,7 @@ define(function(require) {
 		this.y += this.direction.y * this.speed;
 		if (this.x < 0 + config.ball.radius + config.players.area){ //left
 			this.direction.x *= -1;
-			console.log("hit:(", this.x, this.y,")",config.canvas.width);
+			// console.log("hit:(", this.x, this.y,")",config.canvas.width);
 		}
 		if (this.x >= config.canvas.width - config.ball.radius - config.players.area){ // right
 			this.direction.x *= -1;
@@ -57,69 +57,6 @@ define(function(require) {
 		}.bind(this));
 	};
 
-	$.extend(Ball.prototype, {
-
-		_move : function(e){
-			if (this._pause){
-				return;
-			}
-
-
-			// console.log(this.ball.y, this.ball.y - this.ball.regY * this.direction.y, config.stageHeight);
-			// console.log(this.ball.y, this.ball.y + this.ball.regY * this.direction.y, config.stageHeight);
-
-// 			if (this.ball.x >= this.graphics.stageWidth) {
-// 				var s = this.graphics.scores['left'];
-// 				s.num += 1;
-// 				s.text = s.num.toString();
-// 				this.ball.x = this.graphics.stageWidth/2;
-// 				this.direction.x *= -1;
-// 			}
-
-// 			if (this.ball.x <= 0) {
-// 				var s = this.graphics.scores['right'];
-// 				s.num += 1;
-// 				s.text = s.num.toString();
-// 				this.ball.x = this.graphics.stageWidth/2;
-// 				this.direction.x *= -1;
-// 			}
-
-// 			//wall hit test
-// 			var intersection = ndgmr.checkPixelCollision(this.ball, this.graphics.borders, 0);
-// 			if (intersection) {
-// 				this.direction.y *= -1;
-// 			}
-
-// 			Object.keys(this.graphics.paddles).forEach(function(key){
-// 				var paddle = this.graphics.paddles[key];
-// 				intersection = ndgmr.checkPixelCollision(this.ball, paddle, 0);
-// 				if ( intersection ) {
-// 					if (key==='left') {
-// 						this.direction.x = 1;
-// 					} else if (key==='right'){
-// 						this.direction.x = -1;
-// 					}
-// 				}
-// 			}.bind(this));
-		},
-
-		reset: function(){
-			this.graphics.center_object_on_screen(this.ball);
-		},
-
-		pause: function(){
-			this._pause = true;
-		},
-
-		resume: function(){
-			this._pause = false;
-		},
-
-		'init_ball': function() {
-			this.ball = this.graphics.ball;
-		}
-
-	});
 	return Ball; 
 });
 

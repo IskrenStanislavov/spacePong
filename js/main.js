@@ -12,8 +12,7 @@ define(function(require) {
     var renderer = PIXI.autoDetectRenderer(config.canvas.width, config.canvas.height, {
     	"roundPixels": true,
     	"antialias": true,
-//     	"transparent": true,
-    	"view": document.getElementById(config.canvas.id)});
+    });
     document.body.appendChild(renderer.view);
     requestAnimFrame(animate);
 	function animate() {
