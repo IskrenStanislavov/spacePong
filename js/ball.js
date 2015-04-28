@@ -11,6 +11,7 @@ define(function(require) {
 		this.speed = config.ball.speed;
 		this.direction = config.ball.direction;
 		this.radius = config.ball.radius;
+		this._pause = false;
 		this.init();
 	};
 
